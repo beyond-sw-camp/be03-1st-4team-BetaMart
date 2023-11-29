@@ -1,0 +1,4 @@
+# 전시(USER) 시스템 Ideation
+
+1. 회원 테이블(USER TABLE)
+    - 이름(NAME)
