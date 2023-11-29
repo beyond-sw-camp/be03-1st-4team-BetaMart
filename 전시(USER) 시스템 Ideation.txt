@@ -4,3 +4,4 @@
     - 이름(NAME)
     - ID
     - PW
+    - email
