@@ -1,7 +1,7 @@
 # 🔰 배민 B마트 풀필먼트 시스템 구성 예시
 
 <p align="center">
-    <img src="/ideation/fulfillment/img/BmartExample.png" width="700"/>
+    <img src="../images/BmartExample.png" width="700"/>
 </p>
 
 <br/>
