@@ -19,7 +19,7 @@
    2.4 추가 ideation
    
 4. 개념적 모델링 설계
-
+https://github.com/BEYOND-SW-CAMP-TEAM4/Database_team4/blob/38ec28fb6ef044d8a7df98e69b1bf41b6804bf10/images/%EA%B0%9C%EB%85%90%EC%A0%81-%EB%AA%A8%EB%8D%B8%EB%A7%81-%EC%84%A4%EA%B3%84.png
    
 5. 논리적 모델링 설계
 6. 물리적 모델링 설계
