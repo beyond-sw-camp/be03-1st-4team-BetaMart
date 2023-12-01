@@ -7,5 +7,4 @@ CREATE TABLE `crew` (
 	`store_id` INT(11) NULL DEFAULT NULL,
 	PRIMARY KEY (`id`) USING BTREE,
 	INDEX `store_id` (`store_id`) USING BTREE
-)
-COLLATE='utf8mb4_general_ci'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;;

@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS `item`
     `category2`        varchar(50) NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`event_id`) REFERENCES event (`id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;;

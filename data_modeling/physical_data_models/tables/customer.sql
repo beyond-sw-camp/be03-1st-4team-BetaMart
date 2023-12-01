@@ -13,7 +13,4 @@ CREATE TABLE `customer` (
 	`signin_date` DATETIME NULL DEFAULT NULL,
 	`coupon` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
 	PRIMARY KEY (`id`) USING BTREE
-)
-COLLATE='utf8mb4_general_ci'
-ENGINE=InnoDB
-;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;;

@@ -9,7 +9,4 @@ CREATE TABLE `delivery` (
 	INDEX `order_number` (`order_number`),
 	UNIQUE INDEX `order_number` (`order_number`),
 	INDEX `store_id` (`store_id`)
-)
-COLLATE='utf8mb4_general_ci'
-ENGINE=InnoDB
-;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;; 

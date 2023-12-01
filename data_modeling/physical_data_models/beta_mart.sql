@@ -1,176 +1,172 @@
--- store_info 테이블
-CREATE TABLE IF NOT EXISTS `store_info`
-(
-    `id`            bigint(20) NOT NULL AUTO_INCREMENT,
-    `store_addr_id` bigint(20) NOT NULL UNIQUE,
-    `store_name`    varchar(20) DEFAULT NULL UNIQUE,
-    `store_manager` varchar(20) DEFAULT NULL,
-    `tel1`          varchar(20) DEFAULT NULL,
-    `tel2`          varchar(20) DEFAULT NULL,
-    `tel3`          varchar(20) DEFAULT NULL,
-    `covered_area`  varchar(20) DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`store_addr_id`) REFERENCES store_addr (`id`)
-);
+CREATE DATABASE IF NOT EXISTS `Beta_Mart`;
+USE `Beta_Mart`;
 
-
--- store_addr 테이블
-CREATE TABLE IF NOT EXISTS `store_addr`
+-- addr_info 테이블
+CREATE TABLE IF NOT EXISTS `addr_info`
 (
-    `id`               bigint(20)  NOT NULL AUTO_INCREMENT,
-    `branch_name`      varchar(20) NOT NULL,
-    `beopjeongdong`    varchar(10) NOT NULL,
-    `city`             varchar(40) NOT NULL,
-    `sigungu`          varchar(40) NOT NULL,
-    `eupmyeondong`     varchar(40) NOT NULL,
-    `lee`              varchar(40)          DEFAULT NULL,
-    `mountain`         varchar(1)  NOT NULL DEFAULT '0',
-    `street_code`      varchar(12) NOT NULL,
-    `street_name`      varchar(80) NOT NULL,
-    `zip_code`         varchar(5)  NOT NULL,
-    `building`         varchar(40)          DEFAULT NULL,
-    `building_details` varchar(100)         DEFAULT NULL,
-    `details`          varchar(255)         DEFAULT NULL,
+    `id`               INT(11)     NOT NULL AUTO_INCREMENT,
+    `stat_code`        VARCHAR(10)    NOT NULL,
+    `city`             VARCHAR(40)    NOT NULL,
+    `sigungu`          VARCHAR(40)    NOT NULL,
+    `eupmyeondong`     VARCHAR(40)    NOT NULL,
+    `lee`              VARCHAR(40)    DEFAULT NULL,
+    `mountain`         ENUM('0','1')  NOT NULL DEFAULT '0',
+    `street_code`      VARCHAR(12)    NOT NULL,
+    `street_name`      VARCHAR(80)    NOT NULL,
+    `zip_code`         VARCHAR(5)     NOT NULL,
+    `building`         VARCHAR(40)    DEFAULT NULL,
+    `building_details` VARCHAR(100)   DEFAULT NULL,
+    `details`          VARCHAR(255)   DEFAULT NULL,
     PRIMARY KEY (`id`)
-);
-
-
--- orders 테이블
-CREATE TABLE IF NOT EXISTS `orders` (
-  `orders_id_pk` int(11) NOT NULL,
-  `order_number` int(11) NOT NULL,
-  `user_id_fk` varchar(50) NOT NULL,
-  `user_address_fk` varchar(50) NOT NULL,
-  `order_item_id_fk` varchar(50) NOT NULL,
-  `total_amount` int(11) NOT NULL,
-  `coupon_fk` int(11) DEFAULT 0,
-  `point_fk` int(11) DEFAULT 0,
-  `actual payment_amount` int(11) NOT NULL,
-  `distance` int(11) NOT NULL,
-  `deliveryfee` int(11) NOT NULL,
-  `order_time` datetime NOT NULL,
-  PRIMARY KEY (`orders_id_pk`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 -- item 테이블
 CREATE TABLE IF NOT EXISTS `item`
 (
-    `id`               bigint      NOT NULL AUTO_INCREMENT,
-    `event_id`         bigint      not null unique,
-    `item_description` text        NOT NULL,
-    `item_name`        varchar(30) NOT NULL,
-    `store_type`       enum (0, 1, 2) DEFAULT 0,
-    `expire_date`      datetime,
-    `cost_price`       decimal        DEFAULT NULL,
-    `grade`            int(1)         DEFAULT 0,
-    `category1`        varchar(50) NOT NULL,
-    `category2`        varchar(50) NOT NULL,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`event_id`) REFERENCES event (`id`)
-);
+    `id`               BIGINT(20)      NOT NULL AUTO_INCREMENT,
+    `description`      TEXT        NOT NULL,
+    `name`             VARCHAR(30) NOT NULL,
+    `item_type`        ENUM ('0', '1', '2') DEFAULT '0',
+    `expire_date`      DATETIME,
+    `cost_price`       INT(11)        DEFAULT NULL,
+    `grade`            TINYINT(3)         DEFAULT 0,
+    `category`        VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- 전체 coupon table
+CREATE TABLE `coupon_list` (
+	`id`          BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`coupon_name` VARCHAR(50) NOT NULL,
+	`price`       INT(11) NOT NULL,
+	PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- event 테이블
 CREATE TABLE IF NOT EXISTS `event` (
-  `event_id_pk` int(11) NOT NULL,
-  `event_item_id_fk` int(11) NOT NULL,
-  `discount` int(11) NOT NULL,
-  `expire time` datetime NOT NULL,
-  `company` varchar(50) NOT NULL DEFAULT '',
-  PRIMARY KEY (`event_id_pk`) USING BTREE
+  `id`          INT(11) NOT NULL AUTO_INCREMENT,
+  `item_id`     BIGINT(11) NOT NULL,
+  `discount`    INT(11) NOT NULL,
+  `event_type`  VARCHAR(45) NOT NULL,
+  `expire_time` DATETIME NOT NULL,
+  `company`     VARCHAR(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`) USING BTREE,
+  FOREIGN KEY (`item_id`) REFERENCES item(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- store_info 테이블
+CREATE TABLE IF NOT EXISTS `store_info`
+(
+    `id`            BIGINT(20) NOT NULL AUTO_INCREMENT,
+    `name`          VARCHAR(20) DEFAULT NULL UNIQUE,
+    `manager`       VARCHAR(20) DEFAULT NULL,
+    `tel`           CHAR(11) DEFAULT NULL,
+    `addr_id`       INT(11) NOT NULL,
+    `addr_details`  VARCHAR(45) NULL,
+    `covered_area`  VARCHAR(20) DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`addr_id`) REFERENCES addr_info(id) ON UPDATE SET NULL ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- orders 테이블
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id`                BIGINT(11) NOT NULL AUTO_INCREMENT,
+  `order_number`      INT(11) NOT NULL,
+  `customer_id`       BIGINT(20) NOT NULL,
+  `total_count`       INT(11) NOT NULL,
+  `use_point`         INT(11) DEFAULT 0,
+  `total_price`       INT(11) NOT NULL,
+  `distance`          INT(11) NOT NULL,
+  `order_item_id_fk`  VARCHAR(50) NOT NULL,
+  `coupon_id`         BIGINT(11) DEFAULT 0,
+  `crew_id`           BIGINT(20) NOT NULL,
+  `deliveryfee`       INT(11) NOT NULL,
+  `order_time`        DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)  USING BTREE,
+  FOREIGN KEY (`customer_id`)   REFERENCES `customer`(`id`)   ON UPDATE SET NULL ON DELETE SET NULL,
+  FOREIGN KEY (`coupon_id`)     REFERENCES `coupon`(`id`)     ON UPDATE SET NULL ON DELETE SET NULL,
+  FOREIGN KEY (`crew_id`)       REFERENCES `crew`(`id`)       ON UPDATE SET NULL ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 -- delivery 테이블
 CREATE TABLE `delivery` (
-	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-	`rider_name` VARCHAR(10) NOT NULL,
-	`rider_state` ENUM('PICK','WAIT') NOT NULL,
-	`rider_locate` VARCHAR(255) NOT NULL,
-	`order_number` INT UNSIGNED NOT NULL DEFAULT 0,
-	`store_id` BIGINT UNSIGNED NOT NULL DEFAULT 0,
+	`id`        BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`name`      VARCHAR(10) NOT NULL,
+	`state`     ENUM('PICK','WAIT') NOT NULL,
+	`locate`    VARCHAR(255) NOT NULL,
+	`order_id`  BIGINT(20) NOT NULL,
 	PRIMARY KEY (`id`),
-	INDEX `order_number` (`order_number`),
-	UNIQUE INDEX `order_number` (`order_number`),
-	INDEX `store_id` (`store_id`)
-)
-COLLATE='utf8mb4_general_ci'
-ENGINE=InnoDB
-;
+	FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 -- customer 테이블
 CREATE TABLE `customer` (
-	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`user_id` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`name` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`password` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`tel` CHAR(11) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`address` VARCHAR(255) NOT NULL DEFAULT '0' COLLATE 'utf8mb4_general_ci',
-	`age` INT(11) NULL DEFAULT NULL,
-	`gender` ENUM('M','W') NOT NULL COLLATE 'utf8mb4_general_ci',
-	`point` BIGINT(20) NULL DEFAULT NULL,
-	`alarm` CHAR(1) NULL DEFAULT 'Y' COLLATE 'utf8mb4_general_ci',
-	`signin_date` DATETIME NULL DEFAULT NULL,
-	`coupon` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
-	PRIMARY KEY (`id`) USING BTREE
-)
-COLLATE='utf8mb4_general_ci'
-ENGINE=InnoDB
-;
+	`id`          BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`user_id`     VARCHAR(50) NOT NULL,
+	`name`        VARCHAR(10) NOT NULL, 
+	`password`    VARCHAR(20) NOT NULL,
+	`tel`         CHAR(11) NOT NULL,
+	`addr_id`     INT(11) NOT NULL UNIQUE,
+	`age`         TINYINT(3) NULL DEFAULT NULL,
+	`gender`      ENUM('M','W') NOT NULL,
+	`point`       INT(11) NULL DEFAULT NULL,
+	`alarm`       ENUM('Y','N') NULL DEFAULT 'Y',
+	`signin_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`) USING BTREE,
+  FOREIGN KEY (`addr_id`) REFERENCES `addr_info`(`id`) ON UPDATE SET NULL ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 -- crew 테이블
 CREATE TABLE `crew` (
-	`id` BIGINT(20) NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(5) NOT NULL COLLATE 'utf8mb4_general_ci',
-	`age` INT(11) UNSIGNED NOT NULL,
-	`gender` ENUM('M','W') NOT NULL COLLATE 'utf8mb4_general_ci',
-	`duty_start_date` DATETIME NULL DEFAULT current_timestamp(),
-	`store_id` INT(11) NULL DEFAULT NULL,
+	`id`          BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`name`        VARCHAR(10) NOT NULL,
+	`age`         TINYINT(3) UNSIGNED NOT NULL,
+	`gender`      ENUM('M','W') NOT NULL,
+	`start_date`  DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `end_date`    DATETIME NULL,
+  `addr_id`     INT(11) NOT NULL,
+  `addr_detail` VARCHAR(45) NULL,
+	`store_id`    BIGINT(20) NULL DEFAULT NULL,
 	PRIMARY KEY (`id`) USING BTREE,
-	INDEX `store_id` (`store_id`) USING BTREE
-)
-COLLATE='utf8mb4_general_ci'
+	FOREIGN KEY (`addr_id`) REFERENCES `addr_info`(`id`) ON UPDATE SET NULL ON DELETE SET NULL,
+  FOREIGN KEY (`store_info`) REFERENCES `store_info`(`id`) ON UPDATE SET NULL ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- 사용자 별 보유 쿠폰 리스트
+CREATE TABLE `ownership_coupon` (
+	`id`            BIGINT(20) NOT NULL AUTO_INCREMENT,
+	`customer_id`   BIGINT(20) NOT NULL,
+  `coupon_id`     BIGINT(20) NOT NULL,
+	`is_used`       ENUM('Y','N') NOT NULL DEFAULT 'N',
+	`expire_date`   DATETIME DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`id`) USING BTREE,
+  FOREIGN KEY (`customer_id`) REFERENCES `customer`(`id`) ON DELETE CASCADE,
+  FOREIGN KEY (`coupon_id`) REFERENCES `coupon_list`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- 전체 coupon table
-CREATE TABLE `coupon_list` (
-	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`coupon_name` VARCHAR(255) NOT NULL DEFAULT '0' COLLATE 'utf8mb4_general_ci',
-	`price` INT(11) NOT NULL DEFAULT '0',
-	`expire_date` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
-	PRIMARY KEY (`id`) USING BTREE
-)
-COLLATE='utf8mb4_general_ci'
-ENGINE=InnoDB
-;
-
-
--- coupon 발행테이블(중간)
-CREATE TABLE `coupon_published` (
-	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`user_id` INT(11) NOT NULL DEFAULT '0',
-	`whether_used` CHAR(1) NOT NULL DEFAULT 'N' COLLATE 'utf8mb4_general_ci',
-	`download_date` DATETIME NOT NULL DEFAULT current_timestamp(),
-	PRIMARY KEY (`id`) USING BTREE
-)
-COLLATE='utf8mb4_general_ci'
-ENGINE=InnoDB
-;
-
+-- store_item 테이블
+CREATE TABLE IF NOT EXISTS `store_item`
+(
+    `id`          BIGINT(20)   NOT NULL AUTO_INCREMENT,
+    `store_id`    BIGINT(20) NOT NULL,
+    `item_id`     BIGINT(20) NOT NULL,
+    `count`       TINYINT(3) DEFAULT 0,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`store_id`)  REFERENCES `store_info`(`id`),
+    FOREIGN KEY (`item_id`)   REFERENCES `item`(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- stock_status 테이블
 CREATE TABLE IF NOT EXISTS `stock_status`
 (
-    `id`         bigint   NOT NULL AUTO_INCREMENT,
-    `item_id`    bigint   NOT NULL,
-    `store_id`   bigint   NOT NULL UNIQUE,
-    `stocked`    datetime NOT NULL,
-    `damaged`    int,
-    `item_stock` int DEFAULT 0,
+    `id`         BIGINT(20)   NOT NULL AUTO_INCREMENT,
+    `store_item_id` BIGINT(20) NOT NULL,
+    `stocked_time`    DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `damaged`    ENUM('Y','N'),
+    `item_stock` TINYINT(3) DEFAULT 0,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`item_id`) REFERENCES item (`id`),
-    FOREIGN KEY (`store_id`) REFERENCES store_info (`id`)
-);
+    FOREIGN KEY (`store_item_id`) REFERENCES `store_item`(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
