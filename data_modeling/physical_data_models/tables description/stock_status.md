@@ -1,23 +1,27 @@
 # ✍️ store_status 상세 정보
 
-- 매장/상품 매핑 테이블
-- 각 매장 별 재고 현황을 파악하는 것이 주 목적
+> 파손 제품의 수량을 확인하는 목적을 가지고 있다.
 
 ```mariadb
+-- stock_status 테이블
 CREATE TABLE IF NOT EXISTS `stock_status`
 (
-    `id`         bigint   NOT NULL AUTO_INCREMENT,
-    `item_id`    bigint   NOT NULL,
-    `store_id`   bigint   NOT NULL UNIQUE,
-    `stocked`    datetime NOT NULL,
-    `damaged`    int,
-    `item_stock` int DEFAULT 0,
+    `id`            BIGINT NOT NULL AUTO_INCREMENT,
+    `store_item_id` BIGINT NOT NULL,
+    `stocked_time`  DATETIME     DEFAULT CURRENT_TIMESTAMP,
+    `damaged`       INT UNSIGNED DEFAULT 0,
+    `item_stock`    INT UNSIGNED DEFAULT 0,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`item_id`) REFERENCES item (`id`),
-    FOREIGN KEY (`store_id`) REFERENCES store_info (`id`)
-);
+    FOREIGN KEY (`store_item_id`) REFERENCES `store_item` (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_general_ci;
 ```
 
-- `stocked`: 입고 날짜
+- `id`: PK
+- `store_item_id`: FK, store_item의 id
+- `stocked_time`: 입고 날짜
 - `damaged`: 파손 상품 개수
 - `item_stock`: 상품별 재고 현황
+
+> 🚨 기존 `damaged`의 데이터 타입이 ENUM으로 되어 있던 것을 파손 제품의 개수를 명확하게 파악할 수 있도록 INT 타입으로 수정했습니다. 
