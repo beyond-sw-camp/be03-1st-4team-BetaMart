@@ -1,4 +1,4 @@
-# ✍️ coupong_list 상세 정보
+# ✍️ coupon_list 상세 정보
 
 ```mariadb
 CREATE TABLE IF NOT EXISTS `coupon_list`

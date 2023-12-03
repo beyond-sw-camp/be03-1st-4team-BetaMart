@@ -1,4 +1,4 @@
-✍️ customer 상세 정보
+# ✍️ customer 상세 정보
 
 ```mariadb
 -- customer 테이블
