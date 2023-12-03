@@ -2,21 +2,22 @@
 
 ```mariadb
 -- customer 테이블
+-- customer 테이블
 CREATE TABLE IF NOT EXISTS `customer`
 (
-    `id`          BIGINT      NOT NULL AUTO_INCREMENT,
-    `user_id`     VARCHAR(50) NOT NULL,
-    `name`        VARCHAR(10) NOT NULL,
-    `password`    VARCHAR(20) NOT NULL,
-    `tel`         VARCHAR(15) NOT NULL,
-    `addr_id`     BIGINT,
-    `age`         TINYINT UNSIGNED,
-    `gender`      ENUM ('M', 'W', 'NONE') DEFAULT 'NONE',
-    `point`       INT UNSIGNED,
-    `alarm`       ENUM ('Y','N')          DEFAULT 'Y',
-    `signin_date` DATETIME                DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`id`),
-    FOREIGN KEY (`addr_id`) REFERENCES addr_info (`id`) ON UPDATE SET NULL ON DELETE SET NULL
+  `id`          BIGINT      NOT NULL AUTO_INCREMENT,
+  `user_id`     VARCHAR(50) NOT NULL UNIQUE,
+  `name`        VARCHAR(10) NOT NULL,
+  `password`    VARCHAR(20) NOT NULL UNIQUE,
+  `tel`         VARCHAR(15) NOT NULL UNIQUE,
+  `addr_id`     BIGINT,
+  `age`         TINYINT UNSIGNED,
+  `gender`      ENUM ('M', 'W', 'NONE') DEFAULT 'NONE',
+  `point`       INT UNSIGNED,
+  `alarm`       ENUM ('Y','N')          DEFAULT 'Y',
+  `signin_date` DATETIME                DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`addr_id`) REFERENCES addr_info (`id`) ON UPDATE SET NULL ON DELETE SET NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_general_ci;

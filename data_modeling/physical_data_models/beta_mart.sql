@@ -84,10 +84,10 @@ CREATE TABLE IF NOT EXISTS `store_info`
 CREATE TABLE IF NOT EXISTS `customer`
 (
     `id`          BIGINT      NOT NULL AUTO_INCREMENT,
-    `user_id`     VARCHAR(50) NOT NULL,
+    `user_id`     VARCHAR(50) NOT NULL UNIQUE,
     `name`        VARCHAR(10) NOT NULL,
-    `password`    VARCHAR(20) NOT NULL,
-    `tel`         VARCHAR(15) NOT NULL,
+    `password`    VARCHAR(20) NOT NULL UNIQUE,
+    `tel`         VARCHAR(15) NOT NULL UNIQUE,
     `addr_id`     BIGINT,
     `age`         TINYINT UNSIGNED,
     `gender`      ENUM ('M', 'W', 'NONE') DEFAULT 'NONE',
