@@ -1,0 +1,76 @@
+#1번서버 IP : 192.168.57.128
+#2번서버 IP : 192.168.57.129
+
+두 서버 모두 replication 계정 생성
+## mysql 접속
+mysql -uroot -p
+
+## replication계정 생성
+create user replication@'%' identified by '1234';
+
+## replication계정 권한 부여
+grant select on *.* to replication@'%';
+
+## replication계정 권한 적용
+grant all privileges on *.* to replication@'%';
+flush privileges;
+
+1번서버 /etc/mysql/mariadb.conf.d/50-server.cnf 파일내용 수정
+
+## vi /etc/mysql/mariadb.conf.d/50-server.cnf
+[mysqld]
+server-id = 1
+log_bin = /var/log/mysql/mysql-bin.log
+
+## mariadb 재시작
+systemctl restart mariadb
+
+2번서버 /etc/mysql/mariadb.conf.d/50-server.cnf 파일내용 수정
+
+## vi /etc/mysql/mariadb.conf.d/50-server.cnf
+[mysqld]
+server-id = 2
+relay_log = mysql-relay-bin
+
+## mariadb 재시작
+systemctl restart mariadb
+
+## 1번서버 master status 조회
+MariaDB [(none)]> show master status;
++------------------+----------+--------------+------------------+
+| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |
++------------------+----------+--------------+------------------+
+| mysql-bin.000007 |     9802 |              |                  |
++------------------+----------+--------------+------------------+
+1 row in set (0.000 sec)
+
+
+
+## 2번서버 stop slave 및 master 정보 입력
+ MariaDB [(none)]> stop slave;
+ MariaDB [(none)]> CHANGE MASTER TO
+     -> MASTER_HOST='192.168.57.128',
+     -> MASTER_PORT=3306,
+     -> MASTER_USER='replication',
+     -> MASTER_PASSWORD='1234',
+     -> MASTER_LOG_FILE='mysql-bin.000007',
+     -> MASTER_LOG_POS=9802;
+
+
+## 2번서버 start slave 및 slave status 확인
+== Slave_IO_Running: Yes, Slave_SQL_Running: Yes 확인.
+ MariaDB [(none)]> start slave;
+ MariaDB [(none)]> show slave status \G;
+*************************** 1. row ***************************
+                Slave_IO_State: Waiting for master to send event
+                   Master_Host: 192.168.57.128
+                   Master_User: replication
+                   Master_Port: 3306
+                 Connect_Retry: 60
+               Master_Log_File: mysql-bin.000007
+           Read_Master_Log_Pos: 9802
+                Relay_Log_File: mysql-relay-bin.000002
+                 Relay_Log_Pos: 10015
+         Relay_Master_Log_File: mysql-bin.000007
+              Slave_IO_Running: Yes
+             Slave_SQL_Running: Yes
