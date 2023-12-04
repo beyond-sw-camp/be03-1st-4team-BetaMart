@@ -1,4 +1,5 @@
 # ✍️ delivery 상세 정보
+> 배송정보테이블
 
 ```mariadb
 -- delivery 테이블
