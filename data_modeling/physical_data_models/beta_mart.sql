@@ -195,7 +195,7 @@ CREATE TABLE IF NOT EXISTS `delivery`
     `deliveryfee`  INT UNSIGNED          NOT NULL,
     `order_id`     BIGINT                NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_general_ci;
