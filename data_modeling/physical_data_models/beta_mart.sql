@@ -127,6 +127,7 @@ CREATE TABLE IF NOT EXISTS `crew`
     `end_date`    DATETIME,
     `addr_id`     BIGINT,
     `addr_detail` VARCHAR(45),
+    `work_type`   VARCHAR(40),
     `store_id`    BIGINT,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`addr_id`) REFERENCES `addr_info` (`id`) ON UPDATE SET NULL ON DELETE SET NULL,
@@ -189,12 +190,13 @@ CREATE TABLE IF NOT EXISTS `stock_status`
 CREATE TABLE IF NOT EXISTS `delivery`
 (
     `id`       BIGINT                NOT NULL AUTO_INCREMENT,
-    `name`     VARCHAR(50)           NOT NULL,
+    `crew_id`  BIGINT,
     `state`    ENUM ('PICK', 'WAIT') NOT NULL,
     `locate`   VARCHAR(255)          NOT NULL,
     `order_id` BIGINT                NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
+    FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+    FOREIGN KEY ('crew_id') REFERENCES `crew` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_general_ci;
