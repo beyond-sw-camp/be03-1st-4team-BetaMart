@@ -21,6 +21,36 @@ CREATE PROCEDURE create_user()
     DELIMITER ;
 
 ### 매장 정보 입력
+DELIMITER //
+CREATE PROCEDURE create_user()
+	BEGIN
+            INSERT INTO addr_info (stat_code, city, sigungu, eupmyeondong, street_code, street_name, zip_code, building, building_details)
+        VALUES ('1111013500', '서울특별시', '종로구', '관철동', '111104100307', '종로12길 15', '03190', '종로코아', '3층');
+
+                INSERT INTO addr_info (stat_code, city, sigungu, eupmyeondong, street_code, street_name, zip_code, building, building_details)
+        VALUES ('1117013000', '서울특별시', '용산구', '이태원동', '111703102009', '이태원로 145', '04351', '동호프라자', '2층');
+
+                INSERT INTO addr_info (stat_code, city, sigungu, eupmyeondong, street_code, street_name, zip_code, building, building_details)
+        VALUES ('1117013000', '서울특별시', '중량구', '면목동', '112603005029', '겸재로 240', '02200', '행복오피스텔', '지하 1층');
+
+                VALUES ('1123010200', '서울특별시', '동대문구', '용두동', '112303105008', '왕산로 122', '02566', '한방천하 용두동 포스빌', '지상 2층');
+    insert into customer(user_id, name, password, tel, age, gender, alarm) values('user5', '유우저', '012349', '010-9632-0254', 34, 'W', 'Y');
+
+    
+    END //
+    DELIMITER ;
+
+
+
+
+
+INSERT INTO addr_info (stat_code, city, sigungu, eupmyeondong, street_code, street_name, zip_code,
+                       building, building_details)
+VALUES ('2635010600', '부산광역시', '해운대구', '중동', '263503133039', '좌동순환로 473', '48097',
+        '해운대로데오아울렛', '2층');
+
+
+
 
 ### 회원 가입 시 알람 서비스 이용자들에게만 이벤트성 광고 송신
 -- alarm 값이 Y로 들어오면 알람 서비스에 동의 한것이므로 이벤트성 광고 송신
@@ -46,14 +76,14 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE create_user()
 	BEGIN
-    INSERT INTO coupon_list (coupon_name, price) VALUES ('크리스마스 기념 할인쿠폰', '3000');
-    INSERT INTO coupon_list (coupon_name, price) VALUES ('달달한 디저트 쿠폰 매일 드려요', '5000');
-    INSERT INTO coupon_list (coupon_name, price) VALUES ('친구 초대 이벤트 쿠폰', '7000');
-    INSERT INTO coupon_list (coupon_name, price) VALUES ('올해 마지막 1만원 쿠폰팩', '10000');
-    INSERT INTO coupon_list (coupon_name, price) VALUES ('받고 또 받는 7천원 쿠폰', '7000');
-    INSERT INTO coupon_list (coupon_name, price) VALUES ('새로 나왔어요! 비타민 보충 과일', '2000');
-    INSERT INTO coupon_list (coupon_name, price) VALUES ('초특급 할인 이번주 전단 특가', '5000');
-    INSERT INTO coupon_list (coupon_name, price) VALUES ('리뷰 이벤트', '300');
+    INSERT INTO ownership_coupon (customer_id, coupon_id) VALUES ('1', '1');
+    INSERT INTO ownership_coupon (customer_id, coupon_id) VALUES ('1', '5');
+    INSERT INTO ownership_coupon (customer_id, coupon_id) VALUES ('1', '7');
+    INSERT INTO ownership_coupon (customer_id, coupon_id) VALUES ('2', '2');
+    INSERT INTO ownership_coupon (customer_id, coupon_id) VALUES ('2', '4');
+    INSERT INTO ownership_coupon (customer_id, coupon_id) VALUES ('3', '5');
+    INSERT INTO ownership_coupon (customer_id, coupon_id) VALUES ('3', '7');
+    INSERT INTO ownership_coupon (customer_id, coupon_id) VALUES ('4', '3');
 	END //
 DELIMITER ;
 
