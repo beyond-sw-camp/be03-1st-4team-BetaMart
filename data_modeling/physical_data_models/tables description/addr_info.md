@@ -1,4 +1,5 @@
 # ✍️ addr_info 상세 정보
+> 소비자, 직원 및 Beta마트 매장 주소테이블
 
 ```mariadb
 CREATE TABLE IF NOT EXISTS `addr_info`

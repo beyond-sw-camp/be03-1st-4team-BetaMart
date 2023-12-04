@@ -1,16 +1,16 @@
 # ✍️ delivery 상세 정보
+> 배송정보테이블
 
 ```mariadb
--- delivery 테이블
 CREATE TABLE IF NOT EXISTS `delivery`
 (
     `id`       BIGINT                NOT NULL AUTO_INCREMENT,
-    `crew_id`  BIGINT ON DELETE SET NULL,
+    `crew_id`  BIGINT,
     `state`    ENUM ('PICK', 'WAIT') NOT NULL,
     `locate`   VARCHAR(255)          NOT NULL,
     `order_id` BIGINT                NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY ('crew_id') REFERENCES `crew` (`id`) ON DELETE CASCADE ON UDPATE CASCADE,
+    FOREIGN KEY ('crew_id') REFERENCES `crew` (`id`) ON DELETE SET NULL ON UDPATE CASCADE,
     FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4

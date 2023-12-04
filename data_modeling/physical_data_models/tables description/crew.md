@@ -1,7 +1,7 @@
 # ✍️ crew 상세 정보
+>Beta마트 전체 직원정보테이블
 
 ```mariadb
--- crew 테이블
 CREATE TABLE IF NOT EXISTS `crew`
 (
     `id`          BIGINT           NOT NULL AUTO_INCREMENT,

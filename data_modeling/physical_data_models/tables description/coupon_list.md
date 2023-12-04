@@ -1,4 +1,5 @@
 # ✍️ coupon_list 상세 정보
+> Beta마트 전체 쿠폰테이블
 
 ```mariadb
 CREATE TABLE IF NOT EXISTS `coupon_list`

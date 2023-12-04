@@ -2,7 +2,6 @@
 > 사용자 별 보유 쿠폰 리스트
 
 ```mariadb
--- 사용자 별 보유 쿠폰 리스트
 CREATE TABLE IF NOT EXISTS `ownership_coupon`
 (
     `id`          BIGINT NOT NULL AUTO_INCREMENT,
