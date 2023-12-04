@@ -36,11 +36,11 @@ INSERT INTO customer(user_id, name, password, tel, age, gender) values('jang4953
 	VALUES (1+FLOOR(RAND()*10000), 1, 10, 71900);
     -- 주문의 쿠폰 및 할인 적용: 주문에 쿠폰 및 할인 적용 및 금액 확인.
         SELECT 
-        o.id AS order_id,
+        o.order_number AS order_number,
         o.total_price AS original_price,
         IFNULL(cl.price, 0) AS coupon_discount,
         CASE
-                WHEN cl.price IS NOT NULL THEN o.total_price - cl.price
+        WHEN cl.price IS NOT NULL THEN o.total_price - cl.price
         ELSE o.total_price
         END AS discounted_price
         FROM orders o
