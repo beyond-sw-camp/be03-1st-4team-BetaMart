@@ -2,7 +2,6 @@
 > 배송정보테이블
 
 ```mariadb
--- delivery 테이블
 CREATE TABLE IF NOT EXISTS `delivery`
 (
     `id`       BIGINT                NOT NULL AUTO_INCREMENT,
