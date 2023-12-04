@@ -32,3 +32,5 @@
 ### 5. [물리적 모델링 설계](./data_modeling/physical_data_models/beta_mart.sql)
 
 ### 6. [테스트 케이스](./queries/testcase.sql)
+
+- [테이블 별 INSERT 테스트](https://github.com/BEYOND-SW-CAMP-TEAM4/Database_team4/blob/main/queries/docs/insert_test.md)
