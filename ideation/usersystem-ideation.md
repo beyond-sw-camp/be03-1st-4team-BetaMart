@@ -1,6 +1,9 @@
 # ⭐전시(USER) 시스템 Ideation
 사용자가 상품을 확인하고 주문하기까지 과정에서 필요한 데이터베이스를 구상하였다.
 
+
+## B마트 상품구조 예시
+
 <p align="center">
     <img src="../images/Bmart_usersystem_example.png" width="800"/>
 </p>
