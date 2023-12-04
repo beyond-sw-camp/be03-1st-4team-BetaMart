@@ -1,4 +1,5 @@
 # ✍️ order_details 상세 정보
+> 주문상세정보테이블
 
 ```mariadb
 CREATE TABLE IF NOT EXISTS `order_details`
