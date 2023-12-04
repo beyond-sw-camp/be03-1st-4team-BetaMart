@@ -1,7 +1,11 @@
 # ⭐전시(USER) 시스템 Ideation
 사용자가 상품을 확인하고 주문하기까지 과정에서 필요한 데이터베이스를 구상하였다.
 
+<p align="center">
+    <img src="../images/Bmart_usersystem_example.png" width="800"/>
+</p>
 
+<br/>
 
 ## 초기 Ideation
 1. 회원 테이블(USER TABLE)
@@ -47,3 +51,7 @@
     - 갯수
     - 선택상품가격X갯수(해당 상품 가격 X 갯수 값)
     + (테스트케이스) 장바구니의 총 가격을 구할때 선택상품가격X갯수의 총합을 구해서 표시.
+
+
+# REFERENCE
+https://www.youtube.com/watch?v=fg5xbs59Lro
