@@ -1,4 +1,5 @@
 # ✍️ item 상세 정보
+> Beta마트 전체재고수량 테이블
 
 ```mariadb
 -- item 테이블
