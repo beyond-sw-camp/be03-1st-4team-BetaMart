@@ -2,7 +2,6 @@
 > Beta마트 할인이벤트 테이블
 
 ```mariadb
--- event 테이블
 CREATE TABLE IF NOT EXISTS `event`
 (
     `id`          BIGINT       NOT NULL AUTO_INCREMENT,
