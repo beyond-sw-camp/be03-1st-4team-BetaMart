@@ -1,4 +1,5 @@
 # ✍️ event 상세 정보
+> Beta마트 할인이벤트 테이블
 
 ```mariadb
 -- event 테이블
