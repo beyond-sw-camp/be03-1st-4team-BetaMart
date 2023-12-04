@@ -1,8 +1,7 @@
 # ✍️ customer 상세 정보
+> 소비자테이블
 
 ```mariadb
--- customer 테이블
--- customer 테이블
 CREATE TABLE IF NOT EXISTS `customer`
 (
   `id`          BIGINT      NOT NULL AUTO_INCREMENT,
