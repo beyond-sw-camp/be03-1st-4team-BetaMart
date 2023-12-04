@@ -50,7 +50,7 @@
    
 ### 4. [논리적 모델링 설계](./images/논리적-모델링.png)
 
-### 5. [물리적 모델링 설계](./data_modeling/physical_data_models/beta_mart.sql)
+### 5. [물리적 모델링 설계](./data_modeling/beta_mart.sql)
 
 ### 6. [테스트 케이스](./queries/testcase.sql)
 
