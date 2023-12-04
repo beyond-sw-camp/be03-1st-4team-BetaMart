@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS `crew`
     `end_date`    DATETIME,
     `addr_id`     BIGINT,
     `addr_detail` VARCHAR(45),
+    `work_type`   VARCHAR(40),
     `store_id`    BIGINT,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`addr_id`) REFERENCES `addr_info` (`id`) ON UPDATE SET NULL ON DELETE SET NULL,
@@ -29,4 +30,5 @@ CREATE TABLE IF NOT EXISTS `crew`
 - `end_date`: 퇴사 날짜
 - `addr_id`: FK, addr_info 테이블의 id
 - `addr_detail`: 상세 주소
+- `work_type`: 담당 직무 (점장, 매니저, 포장, 배달)
 - `store_id`: FK, store_info 테이블의 id
