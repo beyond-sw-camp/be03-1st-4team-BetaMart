@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `delivery`
     `locate`   VARCHAR(255)          NOT NULL,
     `order_id` BIGINT                NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY ('crew_id') REFERENCES `crew` (`id`) ON DELETE CASCADE ON UDPATE CASCADE,
+    FOREIGN KEY ('crew_id') REFERENCES `crew` (`id`) ON DELETE SET NULL ON UDPATE CASCADE,
     FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4
