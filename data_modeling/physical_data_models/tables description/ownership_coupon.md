@@ -1,4 +1,5 @@
 # ✍️ ownership_coupon 상세 정보
+> 사용자 별 보유 쿠폰 리스트
 
 ```mariadb
 -- 사용자 별 보유 쿠폰 리스트
