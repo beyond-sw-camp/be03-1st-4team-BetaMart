@@ -1,4 +1,4 @@
-# 🔰 배민 B마트 상품구조(USER) 시스템 구성 예시
+# 🔰 상품구조(USER) 시스템 구성 예시
 
 <p align="center">
     <img src="../images/Bmart_usersystem_example.png" width="800"/>
