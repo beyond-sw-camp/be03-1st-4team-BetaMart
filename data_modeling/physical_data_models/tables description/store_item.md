@@ -3,7 +3,6 @@
 > 매장 별 재고 수량 테이블
 
 ```mariadb
--- store_item 테이블
 CREATE TABLE IF NOT EXISTS `store_item`
 (
     `id`       BIGINT NOT NULL AUTO_INCREMENT,
