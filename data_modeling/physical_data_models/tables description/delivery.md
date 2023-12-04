@@ -5,7 +5,7 @@
 CREATE TABLE IF NOT EXISTS `delivery`
 (
     `id`       BIGINT                NOT NULL AUTO_INCREMENT,
-    `crew_id`  BIGINT ON DELETE SET NULL,
+    `crew_id`  BIGINT,
     `state`    ENUM ('PICK', 'WAIT') NOT NULL,
     `locate`   VARCHAR(255)          NOT NULL,
     `order_id` BIGINT                NOT NULL,
