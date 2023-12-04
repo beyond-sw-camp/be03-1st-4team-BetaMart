@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `delivery`
 ```
 
 - `id`: PK
-- `name`:
-- `state`: 매장 내에서 배달 대기 중인 물건의 배달 상태
-- `locate`:
+- `name`: 배달담당자 이름
+- `state`: 매장 내에서 배달 대기 중인 물건의 배달 상태(가져갔는지, 대기상태인지)
+- `locate`: 매장 내에서 배달 대기 중인 물건의 위치(포장이 완료된 물건 픽업위치표시)
 - `order_id`: FK, orders 테이블의 id
