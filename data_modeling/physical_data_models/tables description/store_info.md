@@ -1,4 +1,5 @@
 # ✍️ store_info 상세 정보
+> Beta 마트 매장정보
 
 ```mariadb
 -- store_info 테이블
