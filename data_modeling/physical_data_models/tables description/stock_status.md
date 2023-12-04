@@ -1,9 +1,7 @@
 # ✍️ store_status 상세 정보
 
-> 파손 제품의 수량을 확인하는 목적을 가지고 있다.
-
+> 파손제품 수량확인 테이블
 ```mariadb
--- stock_status 테이블
 CREATE TABLE IF NOT EXISTS `stock_status`
 (
     `id`            BIGINT NOT NULL AUTO_INCREMENT,
